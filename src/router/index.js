@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import TestVmodel from '../views/TestVmodel.vue'
 
 Vue.use(VueRouter)
 
   const routes = [
+  {
+    path: '/test',
+    name: 'TestVmodel',
+    component: TestVmodel
+  },
   {
     path: '/',
     name: 'Home',

@@ -1,25 +1,65 @@
 <template>
   <div>
-    <button @click="isOpen = !isOpen" class="button is-primary is-outlined m-t-sm">プロフィール更新</button>
+    <!-- オファーをみる -->
+    <div 
+      v-if="$slots.openingElement"
+      @click="open"
+      >
+      <slot name="openingElement"></slot>
+    </div>
+    <!-- オファーをみる -->
+    
+    <button v-else
+      @click="open" 
+      class="button profile is-primary is-outlined m-t-sm">
+      プロフィール更新
+    </button>
+    
     <div :class="['modal', {'is-active': isOpen}]">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">プロフィール</p>
+          <p class="modal-card-title">{{header}}</p>
           <button
-            @click="isOpen = false"
+            @click="close"
             class="delete"
             aria-label="close"></button>
         </header>
+
+        
+        
         <section class="modal-card-body">
-        <!-- slot -->
-        <slot/>
+        <!-- slot: form  -->
+          <slot name="submit"/>
         </section>
-        <footer class="modal-card-foot">
-          <button 
-          @click="submintModal"
-          class="button is-success">Save changes</button>
-          <button @click="isOpen = false" class="button">Cancel</button>
+        <!-- slot: form  -->
+
+        <!-- slot -->
+        <section class="modal-card-body">
+          <slot name="message"></slot>
+        </section>
+        <!-- slot -->
+
+        <!-- slot -->
+        <section class="modal-card-body">
+          <slot name="deal"></slot>
+        </section>
+        <!-- slot -->
+
+
+        <!-- deal button -->
+        <footer v-if="!hideFooter" class="modal-card-foot">
+          <div v-if="$slots.footerElement">
+            <slot name="footerElement"></slot>
+          </div>
+          <!-- form botton -->
+          <div v-else>
+            <button
+            @click="submitModal"
+            type="submit"
+            class="button is-success">送信</button>
+          <button @click="close" class="button">キャンセル</button>
+          </div>
         </footer>
       </div>
     </div>
@@ -28,27 +68,42 @@
 
 <script>
 export default {
+  props: {
+    onModalSubmit: {
+      type: Function,
+      required: false
+    },
+    header: {
+      type: String,
+      default: 'プロフィールを更新'
+    },
+    hideFooter: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       isOpen: false
     }
   },
   methods: {
-    async submintModal () {
-      await setTimeout(() => {
-        console.log('submit')
-      }, 500, this.closeTime())
-      
+    submitModal() {
+      this.onModalSubmit(() => this.isOpen = false)
     },
-    closeTime() {
-      setTimeout(() => {
+    close () {
       this.isOpen = false
-      }, 1000)
+    },
+    open () {
+      this.isOpen = true
     }
   }
+  
 }
 </script>
 
-<style>
-
+<style scoped>
+.profile {
+  margin: 20px 20px;
+}
 </style>

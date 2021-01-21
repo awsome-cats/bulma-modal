@@ -1,18 +1,24 @@
 <template>
   <div>
-    <h1>Home</h1>
+    <router-link to="/test">TestVmodel</router-link>
     <updateModal/>
+    <opportunity-deal-modal/>
+    <opportunity-accepted-modal/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import updateModal from '@/components/UpdateModal'
+import OpportunityDealModal from '@/components/OpportunityDealModal'
+import OpportunityAcceptedModal from '@/components/OpportunityAcceptedModal'
 
 export default {
   name: 'Home',
   components: {
-    updateModal
+    updateModal,
+    OpportunityDealModal,
+    OpportunityAcceptedModal
   }
 }
 </script>
