@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+
+
 export default {
   
 }
@@ -32,4 +34,5 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
 </style>

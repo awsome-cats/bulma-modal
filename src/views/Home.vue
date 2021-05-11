@@ -1,6 +1,7 @@
 <template>
   <div>
     <router-link to="/test">TestVmodel</router-link>
+    <router-link to="/handmaid">HandMaidModal</router-link>
     <updateModal/>
     <opportunity-deal-modal/>
     <opportunity-accepted-modal/>

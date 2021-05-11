@@ -15,7 +15,6 @@
         </div>
       </div>
     </template>
-    
     <template #openingElement>
       <button class="button is-info is-outlined m-t-sm">コンタクトをとる</button>
     </template>
